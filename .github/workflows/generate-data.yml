@@ -1,4 +1,4 @@
-name: Get images
+name: Get Data
 
 on:
   schedule:
@@ -25,7 +25,7 @@ jobs:
           git add '*'
           if [[ `git status --porcelain` ]]; then
             echo "OK: Changes detected."
-            git commit -am "gh-action get images data: $(date)"
+            git commit -am "gh-action get data: $(date)"
             git push origin main
           else
           echo "No changes were detected."
