@@ -1,6 +1,7 @@
 WAITFOR=2
 TIMESTAMP="$(date +"%d-%m-%Y-%H-%M-%S")"
-mkdir $TIMESTAMP
+mkdir -p data
+mkdir "data/$TIMESTAMP"
 
 curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon=0&minLat=-90&maxLat=0&token=01dc16ea21ea0e1d1514620ab6c1040a0e385e45' \
   -H 'accept: */*' \
@@ -17,7 +18,7 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-  > "${TIMESTAMP}/all_bottom_left.geojson"
+  > "data/${TIMESTAMP}/all_bottom_left.geojson"
 
 echo "Sleeping for ${WAITFOR} seconds"
 sleep $WAITFOR
@@ -37,7 +38,7 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-  > "${TIMESTAMP}/all_top_left.geojson"
+  > "data/${TIMESTAMP}/all_top_left.geojson"
 
 echo "Sleeping for ${WAITFOR} seconds"
 sleep $WAITFOR
@@ -57,7 +58,7 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=18
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-  > "${TIMESTAMP}/all_top_right.geojson"
+  > "data/${TIMESTAMP}/all_top_right.geojson"
 
 echo "Sleeping for ${WAITFOR} seconds"
 sleep $WAITFOR
@@ -77,4 +78,4 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=18
   -H 'sec-fetch-mode: cors' \
   -H 'sec-fetch-site: same-origin' \
   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' \
-  > "${TIMESTAMP}/all_bottom_right.geojson"
+  > "data/${TIMESTAMP}/all_bottom_right.geojson"
