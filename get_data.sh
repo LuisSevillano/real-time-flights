@@ -1,9 +1,10 @@
 WAITFOR=2
 TIMESTAMP="$(date +"%d-%m-%Y-%H-%M-%S")"
+TOKEN=32d57f45d9ddfbc3ffa3993160c84f192b262337
 mkdir -p data
 mkdir "data/$TIMESTAMP"
 
-curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon=0&minLat=-90&maxLat=0&token=01dc16ea21ea0e1d1514620ab6c1040a0e385e45' \
+curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon=0&minLat=-90&maxLat=0&token=${TOKEN}' \
   -H 'accept: */*' \
   -H 'accept-language: es,en;q=0.9,fr;q=0.8,gl;q=0.7,it;q=0.6' \
   -H 'cache-control: no-cache' \
@@ -23,7 +24,7 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon
 echo "Sleeping for ${WAITFOR} seconds"
 sleep $WAITFOR
 
-curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon=0&minLat=90&maxLat=0&token=01dc16ea21ea0e1d1514620ab6c1040a0e385e45' \
+curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon=0&minLat=90&maxLat=0&token=${TOKEN}' \
   -H 'accept: */*' \
   -H 'accept-language: es,en;q=0.9,fr;q=0.8,gl;q=0.7,it;q=0.6' \
   -H 'cache-control: no-cache' \
@@ -43,7 +44,7 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=-180&maxLon
 echo "Sleeping for ${WAITFOR} seconds"
 sleep $WAITFOR
 
-curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=180&minLat=0&maxLat=90&token=01dc16ea21ea0e1d1514620ab6c1040a0e385e45' \
+curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=180&minLat=0&maxLat=90&token=${TOKEN}' \
   -H 'accept: */*' \
   -H 'accept-language: es,en;q=0.9,fr;q=0.8,gl;q=0.7,it;q=0.6' \
   -H 'cache-control: no-cache' \
@@ -63,7 +64,7 @@ curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=18
 echo "Sleeping for ${WAITFOR} seconds"
 sleep $WAITFOR
 
-curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=180&minLat=0&maxLat=-90&token=01dc16ea21ea0e1d1514620ab6c1040a0e385e45' \
+curl 'https://www.flightaware.com/ajax/vicinity_aircraft.rvt?&minLon=0&maxLon=180&minLat=0&maxLat=-90&token=${TOKEN}' \
   -H 'accept: */*' \
   -H 'accept-language: es,en;q=0.9,fr;q=0.8,gl;q=0.7,it;q=0.6' \
   -H 'cache-control: no-cache' \
