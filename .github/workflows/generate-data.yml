@@ -1,0 +1,32 @@
+name: Get images
+
+on:
+  schedule:
+    - cron: "*/3 * * * *"
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Generate Data
+        run: bash get_data.sh
+
+      - name: Commit files
+        run: |
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          git add '*'
+          if [[ `git status --porcelain` ]]; then
+            echo "OK: Changes detected."
+            git commit -am "gh-action get images data: $(date)"
+            git push origin main
+          else
+          echo "No changes were detected."
+          fi
