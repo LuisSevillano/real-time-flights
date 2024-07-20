@@ -1,0 +1,16 @@
+{
+  "name": "real-time-flights",
+  "version": "1.0.0",
+  "description": "Getting data from https://www.flightaware.com/live/ to see if the situation changes over the days.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "flightradarapi": "^1.3.31"
+  }
+}
