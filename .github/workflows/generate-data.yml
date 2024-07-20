@@ -15,8 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Prepare deps
+        run: npm install
+
       - name: Generate Data
-        run: bash get_data.sh
+        run: node index.js
 
       - name: Commit files
         run: |
