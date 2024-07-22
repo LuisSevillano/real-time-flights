@@ -1,17 +1,17 @@
-import { fileURLToPath } from "url";
 import * as path from "path";
-import { dirname } from "path";
 import * as fs from "fs";
 import { FlightRadar24API } from "flightradarapi";
 
+import { ensureDataDir } from "./modules/utils.js";
+import { generateRetinaMap } from "./modules/map.js";
+
+const folderName = "data";
+
 const frApi = new FlightRadar24API();
 const output = [];
+
 const R = 6371; // Radius of the Earth in km
 const side = 800; // Size of the grid side in km
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const dataDir = path.join(__dirname, "data");
 
 // Function to convert distance in km to degrees
 const kmToDegrees = km => km / ((Math.PI * R) / 180);
@@ -34,14 +34,13 @@ let row = 0;
 let createGridFile = false;
 
 async function main() {
-  await ensureDataDir();
+  await ensureDataDir(folderName);
   console.log(`Starting the job...`);
 
   // Iterate over each cell of the grid
   for (let lat = initialLat; lat > -90; lat -= sideDegrees) {
     let col = 0;
     for (let lng = initialLng; lng < 180; lng += sideDegrees) {
-      // if (index++ > 500) continue;
       const tl_y = Math.min(lat, maxLat);
       const tl_x = Math.max(lng, minLng);
       const br_y = Math.max(lat - sideDegrees, minLat);
@@ -57,8 +56,9 @@ async function main() {
       if (createGridFile === true) {
         addFeature(bbox, row, col);
       }
+      col++;
     }
-    col++;
+    row++;
   }
   if (createGridFile === true) {
     writeGrid();
@@ -92,13 +92,6 @@ async function fetchData({ tl_y, tl_x, br_y, br_x }, row, col) {
   let flights = await frApi.getFlights(null, bounds);
   if (flights.length > 0) {
     output.push(...flights);
-  }
-}
-
-// Function to create the folder if it does not exist
-async function ensureDataDir() {
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir);
   }
 }
 
@@ -148,8 +141,10 @@ function wait(ms) {
 }
 
 function writeData() {
-  const outputFile = path.join(dataDir, `all_${new Date().getTime()}.json`);
-  const finalJson = JSON.stringify(toGeoJSON(output), null, 2);
+  const asGeoJSON = toGeoJSON(output);
+  const timeStamp = new Date().getTime();
+  const outputFile = path.join(folderName, `all_${timeStamp}.json`);
+  const finalJson = JSON.stringify(asGeoJSON, null, 2);
   fs.writeFile(outputFile, finalJson, "utf8", err => {
     if (err) {
       console.error("Error writing file:", err);
@@ -157,6 +152,7 @@ function writeData() {
       console.log(`File ${outputFile} created successfully.`);
     }
   });
+  generateRetinaMap(asGeoJSON, timeStamp);
 }
 
 function toGeoJSON(data) {
