@@ -2,10 +2,10 @@ name: Get Data
 
 on:
   schedule:
-    - cron: "15 * * * *"
-  push:
-    branches:
-      - main
+    - cron: "*/15 0-23 * * *"
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   generate-data:

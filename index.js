@@ -87,7 +87,7 @@ function addFeature(bbox, row, col) {
 }
 
 async function fetchData({ tl_y, tl_x, br_y, br_x }, row, col) {
-  console.log(`Fetching data from row ${row} and col ${col}`);
+  // console.log(`Fetching data from row ${row} and col ${col}`);
   let bounds = frApi.getBounds({ tl_y, tl_x, br_y, br_x });
   let flights = await frApi.getFlights(null, bounds);
   if (flights.length > 0) {
