@@ -10,13 +10,11 @@ const __dirname = dirname(__filename);
 export async function ensureDataDir(dataDirName, rootFolder = false) {
   if (rootFolder === true) {
     const dataDir = path.join(process.cwd(), dataDirName);
-    console.log(dataDir);
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir);
     }
   } else {
     const dataDir = path.join(__dirname, dataDirName);
-    console.log(dataDir);
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir);
     }
