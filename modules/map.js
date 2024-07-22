@@ -10,6 +10,17 @@ const folderName = "images";
 import { ensureDataDir } from "./utils.js";
 
 export async function generateRetinaMap(flightsData, timeStamp) {
+  const dateSTR = new Date(Number(timeStamp))
+    .toLocaleTimeString("en-EN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    })
+    .replace(/,\s*/gi, " ");
+
   await ensureDataDir(folderName);
   const outline = { type: "Sphere" };
   const width = 800 * 2;
@@ -57,6 +68,12 @@ export async function generateRetinaMap(flightsData, timeStamp) {
     context.fillRect(x, y, 1, 1);
     context.fill();
   });
+
+  context.fillStyle = "#000000";
+  context.font = "bold 35px monospace";
+  context.textAlign = "left";
+  context.textBaseline = "middle";
+  context.fillText(dateSTR, 5, 20);
 
   await ensureDataDir(folderName, true);
 
