@@ -1,3 +1,4 @@
+import { csvFormat } from "d3-dsv";
 import * as path from "path";
 import * as fs from "fs";
 import { FlightRadar24API } from "flightradarapi";
@@ -34,7 +35,7 @@ let row = 0;
 let createGridFile = false;
 
 async function main() {
-  await ensureDataDir(folderName);
+  await ensureDataDir(folderName, true);
   console.log(`Starting the job...`);
 
   // Iterate over each cell of the grid
@@ -142,10 +143,11 @@ function wait(ms) {
 
 function writeData() {
   const asGeoJSON = toGeoJSON(output);
+  const asCSV = toCSV(output);
   const timeStamp = new Date().getTime();
-  const outputFile = path.join(folderName, `all_${timeStamp}.json`);
-  const finalJson = JSON.stringify(asGeoJSON, null, 2);
-  fs.writeFile(outputFile, finalJson, "utf8", err => {
+  const outputFile = path.join(folderName, `all_${timeStamp}.csv`);
+  // const finalJson = JSON.stringify(asCSV, null, 2);
+  fs.writeFile(outputFile, asCSV, "utf8", err => {
     if (err) {
       console.error("Error writing file:", err);
     } else {
@@ -153,6 +155,10 @@ function writeData() {
     }
   });
   generateRetinaMap(asGeoJSON, timeStamp);
+}
+
+function toCSV(data) {
+  return csvFormat(data);
 }
 
 function toGeoJSON(data) {
