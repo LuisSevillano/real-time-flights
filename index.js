@@ -31,7 +31,6 @@ const maxLng = 180;
 
 let features = [];
 let row = 0;
-
 let createGridFile = false;
 
 async function main() {
