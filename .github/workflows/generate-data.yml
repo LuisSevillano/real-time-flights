@@ -15,6 +15,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Pull
+        run: |
+          git pull
+
       - name: Prepare deps
         run: npm install
 
@@ -29,7 +33,6 @@ jobs:
           if [[ `git status --porcelain` ]]; then
             echo "OK: Changes detected."
             git commit -am "gh-action get data: $(date)"
-            git pull --rebase
             git push origin main
           else
           echo "No changes were detected."
