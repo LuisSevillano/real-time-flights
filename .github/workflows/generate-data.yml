@@ -29,6 +29,7 @@ jobs:
           if [[ `git status --porcelain` ]]; then
             echo "OK: Changes detected."
             git commit -am "gh-action get data: $(date)"
+            git pull --rebase
             git push origin main
           else
           echo "No changes were detected."
