@@ -37,3 +37,23 @@ jobs:
           else
           echo "No changes were detected."
           fi
+
+      - name: Setup FFmpeg
+        uses: federicocarboni/setup-ffmpeg@v3.1
+
+      - name: Generate video
+        run: |
+          bash generate_video.sh
+
+      - name: Commit files
+        run: |
+          git config --local user.name actions-user
+          git config --local user.email "actions@github.com"
+          git add '*'
+          if [[ `git status --porcelain` ]]; then
+            echo "OK: Changes detected."
+            git commit -am "gh-action update video: $(date)"
+            git push origin main
+          else
+          echo "No changes were detected."
+          fi
