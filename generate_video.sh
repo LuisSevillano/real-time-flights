@@ -6,6 +6,6 @@ ffmpeg -y \
     video/flights.mp4
 
 ffmpeg -y \
-    -i flights.mp4 \
+    -i video/flights.mp4 \
     -vf "fps=30,scale=1200:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
     -loop 0 video/flights.gif
