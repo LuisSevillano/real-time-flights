@@ -6,6 +6,7 @@ mkdir -p video
 # Get current date and time in milliseconds
 current_time="$(date +%s%3)00"
 current_time=$(($current_time))
+echo $current_time
 
 # Filter images from the last 24 hours (86400000 milliseconds)
 last_24h_images=()
