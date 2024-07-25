@@ -38,7 +38,7 @@ if [ ${#last_24h_images[@]} -gt 0 ]; then
     # Create gif file from video
     ffmpeg -y \
         -i video/flights.mp4 \
-        -vf "fps=60,scale=1200:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+        -vf "fps=60,scale=830:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
         -loop 0 video/flights.gif
 else
     echo "No recent images were found within the last 24 hours.."
