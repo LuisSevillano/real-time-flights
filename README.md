@@ -14,3 +14,5 @@ The grid approach is necessary due to API limitations where large area requests 
 #### Notes
 
 The real-time flight visualization GIF is generated using a GitHub Actions workflow that updates every 15 minutes. Following this, the data is filtered to exclusively display results from the past 24 hours.
+
+> **_NOTE:_**  The routine that updates the data has stopped on 26 July 2024..
