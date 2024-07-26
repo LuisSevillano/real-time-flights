@@ -2,7 +2,7 @@
 
 This Node.js project responsibly gathers real-time flight data worldwide using the amazing [flightradarapi](https://github.com/JeanExtreme002/FlightRadarAPI) package, solely for analytical purposes and without profit-driven intentions. The results are stored in CSV files for further analysis and visualization.
 
-![flights gif](./video/flights.gif)
+https://github.com/user-attachments/assets/fef56e0b-0ca7-4d09-88dd-6cad513d87a8
 
 #### Grid Operation
 The script generates a grid over the global map divided into cells of a specified size (800 km in this case). Each grid cell is represented as a quadrilateral bounded by geographical coordinates.
