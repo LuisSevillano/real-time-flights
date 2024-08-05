@@ -2,7 +2,7 @@ name: Get Data
 
 on:
   schedule:
-    - cron: "*/15 0-23 * * *"
+    - cron: "0 * * * *"
   # push:
   #   branches:
   #     - main
